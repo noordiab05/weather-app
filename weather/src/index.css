@@ -4,9 +4,46 @@
   box-sizing: border-box;
 }
 
-body{
+body, #default{
   font-family: 'montseratt', sans-serif;
   background-image: url('./assets/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+#sunny
+{
+  background-image: url('./assets/sunny.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+#rain
+{
+  background-image: url('./assets/rain.jpg.avif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+
+#cloudy
+{
+  background-image: url('./assets/cloudy.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+#night
+{
+  background-image: url('./assets/night.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -16,7 +53,7 @@ body{
 .logo
 {
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: rgba(46, 46, 49, 0.724);
+  color: rgba(199, 199, 210, 0.724);
   font-size:50px;
   font-weight: 500;
   text-align:left;
@@ -26,16 +63,18 @@ body{
 
 
 .searchbox {
-  width: auto;
-  margin: 0 0 0 40px; /* Only left margin if you want space between logo and searchbox */
-  flex:1;
+  flex: 2 1 300px;    /* Grow more than the logo, min width 300px */
+  margin: 0 0 0 40px;
+  min-width: 200px;   /* Prevents it from getting too small */
 }
 
 .searchbox .search-bar {
- 
+  width: 100%;        /* Fill the .searchbox */
+  min-width: 0;       /* Prevents overflow in flexbox */
+  padding: 14px 18px; /* Make it taller and wider */
+  font-size: 24px;    /* Larger text */
+  box-sizing: border-box;
   display: block;
-  width: 95%; /* or any fixed width you prefer */
-  padding: 10px;
   margin: 0; /* Remove margin-top and margin-left */
   appearance: none;
   background: none;
@@ -45,7 +84,6 @@ body{
   border-radius: 0px 0px 16px 16px;
   box-shadow: 0px 5px rgba(0,0,0,0.2);
   color: #31313131;
-  font-size: 20px;
   transition: 0.4s ease;
 
 }
@@ -64,8 +102,10 @@ body{
 .location-box
 {
   margin-top: 50px;
-  margin-left: 5px;
+  margin-left: 0;
   padding: 15px;
+  width: 100%; /* Ensures it fills the left column */
+  box-sizing: border-box;
 }
 
 .location-box .location
@@ -79,6 +119,7 @@ body{
 
 .location-box .date
 {
+ 
   color: #fff;
   font-size: 20px;
   font-weight: 300;
@@ -88,22 +129,18 @@ body{
 
 .location-box .current-temp
 {
-  position: relative;
-  display: inline-block;
-  margin: 30px auto;
+  
+  display: block; /* Not inline-block */
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  
   padding: 15px 25px;
-
   color: #fff;
   font-size: 102px;
   font-weight: 900;
-
   text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
-  text-align: center;
+  text-align: left; /* Align text to the left */
   box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
-
+  margin: 30px 0 0 0; /* Only top margin */
 }
 
 .location-box .current-temp:hover{
@@ -112,18 +149,17 @@ body{
 
 
 .Seven-Day-Forecast-Box {
-  position: absolute;     /* or fixed if you want it to stay when scrolling */
-  top: 150px;              /* distance from the top */
-  right: 100px;            /* distance from the right */
   background-color: rgba(255, 255, 255, 0.3);
   padding: 15px;
   border-radius: 12px;
   color: white;
-  z-index: 5;            /* ensures it sits on top of other elements */
+  z-index: 5;
+  width: 400px;
+  max-width: 90vw;
+  box-sizing: border-box;
+  margin-top: 120px; /* Increase this value to move it further down */
 }
-.Seven-Day-Forecast-Box:hover{
-  background-color:rgb(85, 77, 77);
-}
+
 
 .Seven-Day-Forecast-Header{
   font-size: 50px;
@@ -135,5 +171,79 @@ body{
   padding: 10px;
  }
 
+ .Seven-Day-Forecast-Box:hover{
+  background-color: rgb(99, 94, 94);
+ }
+
+.main-div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px; /* space between left and right content */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+.left-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* <-- Ensures children are left-aligned */
+}
 
 
+
+.Hourly-Forecast-Box{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  position:absolute;
+  left: 20px;
+  bottom: 150px;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 30px;
+  border-radius: 30px;
+  color: white;
+}
+
+.Hourly-Forecast-Box:hover{
+   background-color: rgb(99, 94, 94);
+}
+
+.Hourly-Forecast-Title{
+  text-align:center;
+  font-size: 40px;
+  text-shadow: #31313131;
+  
+}
+.Hourly-Forecast-Items {
+  display: flex;
+  flex-direction: row;   /* Align children in a row */
+  gap: 20px;             /* Space between each Hourly component */
+  align-items: flex-end; /* Optional: align items to the bottom */
+  margin-top: 40px;      /* Add spacing from above if needed */
+  text-align: center;
+}
+
+
+
+
+/* Responsive: stack vertically on small screens */
+@media (max-width: 900px) {
+  .main-div {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+  .Seven-Day-Forecast-Box {
+    width: 100%;
+    margin-top: 80px;
+  }
+  .Hourly-Forecast-Box {
+    width: 100%;
+    margin-bottom: 80px;
+    position: static; /* <-- Add this to override absolute positioning */
+    left: unset;
+    bottom: unset;
+  }
+}

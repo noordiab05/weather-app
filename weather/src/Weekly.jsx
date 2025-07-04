@@ -69,15 +69,11 @@ function Weekly(props)
     
     return(
         <div>
-            {props.weather && props.weather.forecast ? (
                 <div className="Seven-day-forecast">
                     <div className="day">
                         {props.id === "today" ? "Today" : getDay(props.dayKey)}    {getEmoji(weatherCondition)}    {props.weather.forecast.forecastday[props.dayKey].day.avgtemp_c}°C
                     </div>
-                    
-                    
                 </div>
-            ) : ('')}
         </div>
     );
 
