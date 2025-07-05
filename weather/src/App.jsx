@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 import Weekly from './Weekly';
 import Hourly from './Hourly';
+import Home from './Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
 
 
 const api= {
@@ -79,7 +84,6 @@ function App()
             hours.push(currentHour);
 
         }
-
         return hours;
       }
 
@@ -95,7 +99,7 @@ function App()
         {
             return '☀️';
         }
-        else if(weatherCondition.includes('Cloudy'))
+        else if(weatherCondition.includes('Cloudy') || weatherCondition.includes('Overcast'))
         {
             return '☁️';
         }
@@ -141,67 +145,68 @@ function App()
     }
 
     return(
-        <div className= "main-div" id= {getBackground()}>
-            <div className="left-content">
-                <div className="header-row">
-                    <div className="logo">
-                        Weather Finder
-                    </div>
-                    <div className="searchbox">
-                        <input type="text" className="search-bar" placeholder= "Search location..." onChange={e=>setLocation(e.target.value)} value={location} onKeyPress={search}></input>
+        <Router>
+            <div className= "main-div" id= {getBackground()}>
+                <div className="left-content">
+                    <div className="header-row">
+                        <nav>
+                            <ul className="nav-bar-items">
+                                <li className="logo"><Link to="/Home" onClick={()=>{
+                                    //makes the current location's info disappear
+                                    setWeather({});
+                                    setLocation('');
+                                }}>Weather Finder</Link></li>
+                                <li><Link to="/Home" onClick={()=>{
+                                    //makes the current location's info disappear
+                                    setWeather({});
+                                    setLocation('');
+                                }}>Popular Locations</Link></li>
+                                <li><Link to="/" onClick={()=>{
+                                    //makes the current location's info disappear
+                                    setWeather({});
+                                    setLocation('');
+                                }}>Search</Link></li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
 
-                {weather.location ? (
-                <div>
-                    <div className="location-box">
-                        <div className="location">📍 {weather.location.name}, {weather.location.country}</div>
-                        <div className="date"></div>
-                        <div className="current-temp">
-                        {weather.current ? `${Math.round(weather.current.temp_c)}°C` : ""}{" "}{getEmoji(weatherCondition)}
-                        </div>
-                    </div>
-                </div>
-                ): ('')}
+
+            <Routes>
+                <Route
+                    path="/" element={
+                        <Home
+                            location={location}
+                            setLocation={setLocation}
+                            weather={weather}
+                            search= {search}
+                            keys={keys}
+                            hours={hours}
+                            weatherCondition={weatherCondition}
+                            getEmoji={getEmoji}
+                            getBackground={getBackground}
+                        ></Home>
+                    }
+                ></Route>
+                <Route
+                    path="/Home" element={
+                        <Home
+                            location={location}
+                            setLocation={setLocation}
+                            weather={weather}
+                            search= {search}
+                            keys={keys}
+                            hours={hours}
+                            weatherCondition={weatherCondition}
+                            getEmoji={getEmoji}
+                            getBackground={getBackground}
+                        ></Home>
+                    }
+                ></Route>
+                
+            </Routes>
             </div>
-
-
-            {weather.forecast && (
-              <div className="Seven-Day-Forecast-Box">
-                <div className="Seven-Day-Forecast-Header">7 Day Forecast
-                  <div className="Weekly-Forecast-Format">
-                    <Weekly dayKey={keys[0]} id="today" location={location} weather={weather} />
-                    <Weekly dayKey={keys[1]} id="other" location={location} weather={weather} />
-                    <Weekly dayKey={keys[2]} id="other" location={location} weather={weather} />
-                    <Weekly dayKey={keys[3]} id="other" location={location} weather={weather} />
-                    <Weekly dayKey={keys[4]} id="other" location={location} weather={weather} />
-                    <Weekly dayKey={keys[5]} id="other" location={location} weather={weather} />
-                    <Weekly dayKey={keys[6]} id="other" location={location} weather={weather} />
-                  </div>
-                </div>
-              </div>
-            )}
-
-
-            <div className="Hourly-Forecast-Box">
-                {weather.forecast ? (
-                  <>
-                    <div className="Hourly-Forecast-Title">Today's Forecast</div>
-                    <div className="Hourly-Forecast-Items">
-                      <Hourly location={location} weather={weather} hour={hours[0]} />
-                      <Hourly location={location} weather={weather} hour={hours[1]} />
-                      <Hourly location={location} weather={weather} hour={hours[2]} />
-                      <Hourly location={location} weather={weather} hour={hours[3]} />
-                      <Hourly location={location} weather={weather} hour={hours[4]} />
-                    </div>
-                  </>
-                ) : ('')}
-            </div>
-
-
-        
-        
-        </div>
+        </Router>
     );
 }
 

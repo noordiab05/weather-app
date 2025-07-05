@@ -49,7 +49,7 @@ function Weekly(props)
         {
             return '☀️';
         }
-        else if(weatherCondition.includes('Cloudy'))
+        else if(weatherCondition.includes('Cloudy') || weatherCondition.includes('Overcast'))
         {
             return '☁️';
         }
