@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+bubbly-text {
+  font-family: 'Fredoka One', cursive;
+}
+
+
 *{
   margin:0;
   padding:0;
@@ -261,6 +268,48 @@ body, #default{
   text-align: center;
 }
 
+.popular-locations
+{
+  position:absolute;
+  top: 120px;
+  left: 100px;
+  width: 600px;
+  height: 600px;
+  text-align: center;
+  align-self: center;
+  align-items:center;
+
+
+  background-color:#31313131;
+  border-radius:20%;
+}
+
+
+.title{
+  font-size: 50px;
+  font-family: 'Fredoka One', cursive;
+  color:aliceblue;
+  padding: 20px 10px;
+}
+
+.popular-locations ul{
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+  padding:10px;
+  margin:0;
+}
+
+button{
+  border-radius: 10%;
+  border: none;
+  font-size: 40px;
+  background-color:aliceblue;
+}
+
+button:hover{
+  background-image:url("./assets/button.jpg");
+}
 
 
 
@@ -298,8 +347,11 @@ body, #default{
   }
 }
 
-
-
-
-
-
+@media(min-width:800px)
+{
+  .popular-locations{
+    top:120px;
+    left:400px;
+    transition: 0.4 ease;
+  }
+}

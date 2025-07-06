@@ -4,7 +4,7 @@ import Hourly from './Hourly';
 import Home from './Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import PopularLocations from './PopularLocations';
 
 
 
@@ -160,12 +160,12 @@ function App()
                                     //makes the current location's info disappear
                                     setWeather({});
                                     setLocation('');
-                                }}>Popular Locations</Link></li>
-                                <li><Link to="/" onClick={()=>{
+                                }}>Search</Link></li>
+                                <li><Link to="/PopularLocations" onClick={()=>{
                                     //makes the current location's info disappear
                                     setWeather({});
                                     setLocation('');
-                                }}>Search</Link></li>
+                                }}>Popular Locations</Link></li>
                             </ul>
                         </nav>
                     </div>
@@ -174,7 +174,7 @@ function App()
 
             <Routes>
                 <Route
-                    path="/" element={
+                    path="/Home" element={
                         <Home
                             location={location}
                             setLocation={setLocation}
@@ -189,18 +189,14 @@ function App()
                     }
                 ></Route>
                 <Route
-                    path="/Home" element={
-                        <Home
+                    path="/PopularLocations" element={
+                        <PopularLocations
+                            weather={weather}
+                            setWeather={setWeather}
                             location={location}
                             setLocation={setLocation}
-                            weather={weather}
-                            search= {search}
-                            keys={keys}
-                            hours={hours}
-                            weatherCondition={weatherCondition}
                             getEmoji={getEmoji}
-                            getBackground={getBackground}
-                        ></Home>
+                        ></PopularLocations>
                     }
                 ></Route>
                 
